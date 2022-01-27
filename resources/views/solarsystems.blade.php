@@ -27,11 +27,13 @@
             <tr>
                 <th>Name of the solar system</th>
                 <th>Age in years</th>
+                <th>Planet count</th>
             </tr>
             @foreach ($solarsystems as $solars)
             <tr>
                 <td>{{ ucfirst($solars->name) }}</td>
                 <td>{{ ucfirst($solars->age_in_years) }}</td>
+                <td>{{ ucfirst($solars->planets_count) }}</td>
             </tr>
             @endforeach
         </table>
