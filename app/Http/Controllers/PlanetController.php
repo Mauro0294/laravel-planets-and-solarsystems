@@ -29,6 +29,7 @@ class PlanetController extends Controller
     $planets = Planet::with('solar')->where('name', $planeet)->get();
     echo view('planets', ['planets' => $planets]);
     echo "
+    <a href='$planeet/edit'>Edit planet data</a><br>
     <a href='../planets'>Go back!</a>
     ";
     }
@@ -44,6 +45,21 @@ class PlanetController extends Controller
         $solar_systems_id = $request->input('solar_systems_id');
         $data = array('name' => $name, 'description' => $description, 'size_in_km' => $size_in_km, 'solar_systems_id' => $solar_systems_id);
         Planet::insert($data);
+        return redirect('./planets');
+    }
+    public function editPlanetDataForm($planeet)
+    {
+        $dataPlanet = Planet::where('name', $planeet)->first();
+        echo view('editplanetdataform', ['dataPlanet' => $dataPlanet]);
+    }
+    public function editPlanetData($planeet, Request $request)
+    {
+        echo Planet::where('name', strval($planeet))->update([
+        'name' => $request->input('name'),
+        'description' => $request->input('description'),
+        'size_in_km' => $request->input('size_in_km'),
+        'solar_systems_id' => $request->input('solar_systems_id')
+    ]);
         return redirect('./planets');
     }
 }

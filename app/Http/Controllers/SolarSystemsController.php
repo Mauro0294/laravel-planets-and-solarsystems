@@ -10,8 +10,9 @@ class SolarSystemsController extends Controller
     {
         // Alle sterrenstelsels weergeven
         $solarsystems = SolarSystems::all();
+        $solarsystems = SolarSystems::withCount(['planets'])->get();
 
-        echo view('solarsystems', ['solarsystems'=>$solarsystems]);
+        echo view('solarsystems', ['solarsystems'=>$solarsystems])->render();
         echo "
         <a href='../solarsystems/insert'>Insert new solar system!</a>
         <br>
