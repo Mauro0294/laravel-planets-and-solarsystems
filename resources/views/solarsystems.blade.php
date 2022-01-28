@@ -31,7 +31,7 @@
             </tr>
             @foreach ($solarsystems as $solars)
             <tr>
-                <td>{{ ucfirst($solars->name) }}</td>
+                <td><a href='solarsystems/{{$solars->id}}'>{{ ucfirst($solars->name) }}</a></td>
                 <td>{{ ucfirst($solars->age_in_years) }}</td>
                 <td>{{ ucfirst($solars->planets_count) }}</td>
             </tr>

@@ -30,6 +30,7 @@ class PlanetController extends Controller
     echo view('planets', ['planets' => $planets]);
     echo "
     <a href='$planeet/edit'>Edit planet data</a><br>
+    <a href='$planeet/delete'>Delete planet</a><br>
     <a href='../planets'>Go back!</a>
     ";
     }
@@ -61,5 +62,12 @@ class PlanetController extends Controller
         'solar_systems_id' => $request->input('solar_systems_id')
     ]);
         return redirect('./planets');
+    }
+    public function deletePlanet($planeet) {
+        Planet::delete('delete from planets where name = ?',[$planeet]);
+        return redirect('./planets');
+    }
+    public function deletePlanetForm($planeet) {
+        return view('removeplanetform');
     }
 }

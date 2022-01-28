@@ -9,6 +9,6 @@ class SolarSystems extends Model
 {
     public function planets()
     {
-    return $this->hasMany(Planet::class, 'solar_systems_id');
+    return $this->hasMany(Planet::class);
     }
 }

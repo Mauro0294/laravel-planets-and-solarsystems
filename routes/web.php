@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PlanetController;
 use App\Http\Controllers\SolarSystemsController;
+use App\Http\Controllers\CustomAuthController;
 
 // Route zonder path
 Route::get('/', [PlanetController::class, 'home'])->name('home');
@@ -10,6 +11,10 @@ Route::get('/', [PlanetController::class, 'home'])->name('home');
 // Routes voor toevoegen van planeten
 Route::get('planets/insert', [PlanetController::class, 'insertForm'])->name('insertformplanets');
 Route::post('planets/create', [PlanetController::class, 'insertData'])->name('insertplanet');
+
+// Routes voor verwijderen van planeten
+Route::get('planets/{planeet}/delete', [PlanetController::class, 'deletePlanetForm'])->name('deletePlanetForm');
+Route::post('planets/{planeet}/destroy', [PlanetController::class, 'deletePlanet'])->name('deletePlanet');
 
 // Routes voor planeten overzicht
 Route::get('/planets', [PlanetController::class, 'index'])->name('showplanets');
@@ -33,6 +38,10 @@ Route::post('/solarsystems/{id}/change', [SolarSystemsController::class, 'editSo
 
 // Redirect route voor verkeerde url's
 Route::get('/planets/planets/{planeet}', function () {
+    return redirect('/planets');
+});
+
+Route::get('/solarsystems/solarsystems/{id}', function () {
     return redirect('/planets');
 });
 ?>
